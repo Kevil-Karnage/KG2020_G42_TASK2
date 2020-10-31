@@ -28,15 +28,18 @@ public class DrawPanel extends JPanel implements MouseMotionListener {
         bi_g.fillRect(0,0,getWidth(), getHeight());
         bi_g.setColor(Color.black);
         bi_g.setColor(Color.orange);
-        //Можно менять GraphicsLineDrawer на WuLineDrawer и т.д., делать меняющимся из-за каких-то действий, с помощью свитчей, if например по клику или нажатию кнопки. Но лучше использовать паттерн "Пораждающая фабрика"
+
         PixelDrawer pd = new GraphicsPixelDrawer(bi_g);
 
         LineDrawer dld = new DDALineDrawer(pd);
         LineDrawer bld = new BresenhamLineDrawer(pd);
         LineDrawer wld = new WuLineDrawer(pd);
         DrawUtils.drawSnowflake(dld, 100, 100, 75, 50);
+        dld.drawLine(100, 100, position.x, position.y);
         DrawUtils.drawSnowflake(bld, 300, 100, 75, 50);
+        bld.drawLine(300, 100, position.x, position.y);
         DrawUtils.drawSnowflake(wld, 500, 100, 75, 50);
+        wld.drawLine(500, 100, position.x, position.y);
         g.drawImage(bi, 0, 0, null);
         bi_g.dispose(); //убираемся
     }
